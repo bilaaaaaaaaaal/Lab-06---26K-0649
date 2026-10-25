@@ -1,0 +1,32 @@
+#include <stdio.h>
+int main() {
+    int seats[15] = {1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1};
+    int booked = 0, empty = 0;
+    int first_avail = -1, last_avail = -1;
+    int booked_count = 0;
+    for (int i = 0; i < 15; i++) {
+        if (seats[i] == 1) {
+            booked++;
+        } else {
+            empty++;
+            if (first_avail == -1) {
+                first_avail = i + 1;
+            }
+            last_avail = i + 1;
+        }
+    }
+    for (int i = 0; i < 15 && booked_count < 3; i++) {
+        if (seats[i] == 0) {
+            seats[i] = 1;
+            booked_count++;
+        }
+    }
+    printf("Total booked seats: %d, Total empty seats: %d\n", booked, empty);
+    printf("First available seat: %d\n", first_avail);
+    printf("Last available seat: %d\n", last_avail);
+    printf("Final seating chart: ");
+    for (int i = 0; i < 15; i++) {
+        printf("%d ", seats[i]);
+    }
+    printf("\n");
+}
