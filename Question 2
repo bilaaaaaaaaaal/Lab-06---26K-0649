@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+int main() {
+    char passwords[5][50];
+    int scores[5];
+    int below_10_count = 0;
+    int max_score_idx = 0;
+    for (int i = 0; i < 5; i++) {
+        printf("Enter password %d: ", i + 1);
+        scanf("%s", passwords[i]);
+    }
+    for (int i = 0; i < 5; i++) {
+        int current_score = 0;
+        int len = strlen(passwords[i]);
+        for (int j = 0; j < len; j++) {
+            if (islower(passwords[i][j])) {
+                current_score += 1;
+            } else if (isupper(passwords[i][j])) {
+                current_score += 2;
+            } else if (isdigit(passwords[i][j])) {
+                current_score += 3;
+            }
+        }
+        if (len >= 8) {
+            current_score += 5;
+        }
+        if (strstr(passwords[i], "123") != NULL) {
+            current_score -= 3;
+        }
+        scores[i] = current_score;
+        if (current_score < 10) {
+            below_10_count++;
+        }
+        if (i == 0 || current_score > scores[max_score_idx]) {
+            max_score_idx = i;
+        }
+    }
+    printf("\n--- Password Strength Results ---\n");
+    for (int i = 0; i < 5; i++) {
+        printf("Password: %s | Score: %d\n", passwords[i], scores[i]);
+    }
+    printf("\nStrongest Password: %s (Score: %d)\n", passwords[max_score_idx], scores[max_score_idx]);
+    printf("Number of passwords scoring below 10: %d\n", below_10_count);
+    return 0;
+}
