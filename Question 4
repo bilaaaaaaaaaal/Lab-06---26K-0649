@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int main() {
+    int marks[15];
+    int total = 0;
+    int count_100 = 0;
+    float avg;
+    for (int i = 0; i < 15; i++) {
+        printf("Enter mark for student %d: ", i + 1);
+        scanf("%d", &marks[i]);
+    }
+    for (int i = 0; i < 15; i++) {
+        marks[i] += 5;
+        if (marks[i] > 100) {
+            marks[i] = 100;
+        }
+    }
+    int max = marks[0];
+    int min = marks[0];
+    for (int i = 0; i < 15; i++) {
+        total += marks[i];
+        if (marks[i] == 100) {
+            count_100++;
+        }
+        if (marks[i] > max) {
+            max = marks[i];
+        }
+        if (marks[i] < min) {
+            min = marks[i];
+        }
+    }
+    avg = (float)total / 15;
+    printf("New class average: %.2f[cite: 4]\n", avg);
+    printf("Students with exactly 100: %d[cite: 4]\n", count_100);
+    printf("Range: %d[cite: 4]\n", max - min);
+    return 0;
+}
