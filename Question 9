@@ -1,0 +1,30 @@
+#include <stdio.h>
+int main() {
+    int transfers[10] = {5000, 50, 12000, 500000, 20, 8000, 25000, 300, 450000, 15000};
+    int flagged_count = 0;
+    int normal_sum = 0;
+    int normal_count = 0;
+    int largest = transfers[0];
+    for (int i = 0; i < 10; i++) {
+        if (transfers[i] < 100) {
+            printf("Transfer %d (%d): Flagged - Too small\n", i + 1, transfers[i]);
+            flagged_count++;
+        } else if (transfers[i] > 200000) {
+            printf("Transfer %d (%d): Flagged - Too large\n", i + 1, transfers[i]);
+            flagged_count++;
+        } else {
+            normal_sum += transfers[i];
+            normal_count++;
+        }
+        if (transfers[i] > largest) {
+            largest = transfers[i];
+        }
+    }
+    float normal_avg = 0;
+    if (normal_count > 0) {
+        normal_avg = (float)normal_sum / normal_count;
+    }
+    printf("Total flagged transfers: %d\n", flagged_count);
+    printf("Average of normal transfers: %.02f\n", normal_avg);
+    printf("Largest transfer amount: %d\n", largest);
+}
