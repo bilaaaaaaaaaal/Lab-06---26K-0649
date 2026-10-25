@@ -1,0 +1,31 @@
+#include <stdio.h>
+int main(){
+    int waiting[12],total=0,count=0,maxsig=1,minsig=1;
+    float avg;
+    for(int i=0;i<12;i++){
+        printf("enter amount of cars waiting at signal %d",i+1);
+        scanf("%d",&waiting[i]);
+    }
+    int max=waiting[0],min=waiting[0];
+    for(int i=0;i<12;i++){
+        total+=waiting[i];
+    }
+    avg=(float)total/12;
+    for(int i=0;i<12;i++){
+        if(waiting[i]>avg){
+            count++;
+        }
+        if(waiting[i]>max){
+            maxsig=i+1;
+            max=waiting[i];
+        }
+        if(waiting[i]<min){
+            minsig=i+1;
+            min=waiting[i];
+        }
+    }
+    printf("average waiting cars: %.02f",avg);
+    printf("most cars on signal %d and least on %d",maxsig,minsig);
+    printf("overloaded signals: %d",count);
+    printf("difference between highest number of cars and lowest is %d", max-min);
+}
